@@ -3,21 +3,16 @@
     become : true
     tasks:
 
-    - name: Bu gorev, apt paket index'ini gunceller.
-      apt:
-        update_cache: yes
-      when : ansible_distribution == "Ubuntu"
-
-    - name : htop paketini ubuntulara yukleme
+    - name : htop paketini Ubuntu'dan kaldirma islemini yapar
       apt :
         name: htop
-        state: latest
+        state: absent
       when : ansible_distribution == "Ubuntu"
 
-    - name: Bu gorev Apache2 yuklemesini gerceklestirir
+    - name: Bu gorev Apache2 kaldirmasini gerceklestirir
       apt:
         name: apache2
-        state: latest
+        state: absent
       when: ansible_distribution == "Ubuntu"
 
 #    - name : htop paketini RedHat e kurar

@@ -1,0 +1,37 @@
+---
+# v3'un daha da sadelestirilmis hali. Satir sayisi azaltilmis durumda.
+  - hosts: all
+    become : true
+    tasks:
+
+#Ubuntu
+    - name: Bu gorev, apt paket index'ini gunceller.
+      apt:
+        name: 
+        - htop
+        - apache2
+        state: latest
+        update_cache: yes
+      when : ansible_distribution == "Ubuntu"
+
+# CentOS
+
+    - name: Bu gorev, apt paket index'ini gunceller.
+      yum:
+        name:
+          - python3
+          - httpd
+        state: latest
+        update_cache: yes
+      when : ansible_distribution == "Rocky"
+
+# RedHat
+
+    - name: Bu gorev, apt paket index'ini gunceller.
+      dnf:
+        name:
+          - python3
+          - httpd
+        state: latest
+        update_cache: yes
+      when : ansible_distribution == "RedHat"

@@ -1,0 +1,60 @@
+---
+  - hosts: all
+    become : true
+    tasks:
+
+    - name: Bu gorev, apt paket index'ini gunceller.
+      apt:
+        update_cache: yes
+      when : ansible_distribution == "Ubuntu"
+
+    - name : htop paketini ubuntulara yukleme
+      apt :
+        name: htop
+        state: latest
+      when : ansible_distribution == "Ubuntu"
+
+    - name: Bu gorev Apache2 yuklemesini gerceklestirir
+      apt:
+        name: apache2
+        state: latest
+      when: ansible_distribution == "Ubuntu"
+
+# CentOS
+
+    - name: Bu gorev, apt paket index'ini gunceller.
+      yum:
+        update_cache: yes
+      when : ansible_distribution == "Rocky"
+
+    - name : Python3 paketini CentOS'lara yukleme
+      yum :
+        name: python3
+        state: latest
+      when : ansible_distribution == "Rocky"
+
+    - name: Bu gorev Apache yuklemesini CentOS sunucularina gerceklestirir
+      yum:
+        name: httpd
+        state: latest
+      when: ansible_distribution == "Rocky"
+
+# RedHat
+
+    - name: Bu gorev, apt paket index'ini gunceller.
+      dnf:
+        update_cache: yes
+      when : ansible_distribution == "RedHat"
+
+    - name : Python3 paketini RedHat sunucularina yukleme islemini gerceklestirir.
+      dnf :
+        name: python3
+        state: latest
+      when : ansible_distribution == "RedHat"
+
+    - name: Bu gorev Apache2 yuklemesini RedHat sunucularina gerceklestirir
+      dnf:
+        name: httpd
+        state: latest
+      when: ansible_distribution == "RedHat"
+    
