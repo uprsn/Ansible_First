@@ -1,0 +1,45 @@
+---
+  - hosts: all
+    become: yes
+    tasks:
+
+# Bu gorev, sunucu guncellemeleri icin hazirlanmistir..    
+    - name : Ubuntu'larda Update ve upgrade islemlerini gerceklestirir.
+      ansible.builtin.package:
+        upgrade: dist
+        update_cache: yes
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Centos'larda Update ve upgrade islemlerini gerceklestirir.
+      ansible.builtin.package:
+        update_only: yes
+        update_cache: yes
+      when: ansible_distribution == "Rocky"
+
+    - name: RedHat'lerde Update ve upgrade islemlerini gerceklestirir.
+      ansible.builtin.package:
+        update_only: yes
+        update_cache: yes
+      when: ansible_distribution == "RedHat"
+
+# Bu gorev tum Linux dagitimlarina uygulama yukler.
+  - hosts: Worker
+    become: true
+    tasks:
+      - name: Isletim sistemlerini tespit et
+        debug: var=ansible_os_family
+
+      - name: Dosyalardan degiskenleri okur.
+        include_vars: "{{ lookup('first_found', params) }}"
+        vars:
+          params:
+            files:
+              - "vars/apache_{{ ansible_os_family }}.yml"
+              - "vars/apache_varsayilan.yml"
+      
+      - name:  Bu gorev, tum sunuculara uygulama yukler.
+        ansible.builtin.package:
+          name: 
+            - "{{ uygulama1 }}"
+            - "{{ uygulama2 }}"
+          state: latest
