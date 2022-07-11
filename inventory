@@ -2,8 +2,8 @@
 # 172.16.253.150
 
 [Worker]
-172.16.253.151
-172.16.253.152
-172.16.253.153
-172.16.253.154
-172.16.253.155
+172.16.253.151 uygulama1=httpd uygulama2=python3
+172.16.253.152 uygulama1=httpd uygulama2=python3
+172.16.253.153 uygulama1=httpd uygulama2=python3
+172.16.253.154 uygulama1=htop uygulama2=apache2
+172.16.253.155 uygulama1=httpd uygulama2=python3

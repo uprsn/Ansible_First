@@ -1,0 +1,13 @@
+---
+# v4'un daha da sadelestirilmis hali. Satir sayisi azaltilmis durumda.
+  - hosts: all
+    become : true
+    tasks:
+
+    - name: Bu gorev, tum sunuculara uygulama yukler.
+      ansible.builtin.package:
+        name: 
+        - "{{ uygulama1 }}"
+        - "{{ uygulama2 }}"
+        state: absent
+        update_cache: yes
