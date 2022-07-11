@@ -1,0 +1,10 @@
+---
+
+  - hosts: Worker
+    become : true
+    tasks:
+
+    - name: Bu gorev ansibleuser2 isimli kullaniciyi sunuculara ekler.
+      user:
+        name: ansibleuser2
+    

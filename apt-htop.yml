@@ -1,0 +1,25 @@
+---
+  - hosts: all
+    become : true
+    tasks:
+
+    - name: Bu gorev, apt paket index'ini gunceller.
+      apt:
+        update_cache: yes
+      when : ansible_distribution == "Ubuntu"
+
+    - name : htop paketini ubuntulara yukleme
+      apt :
+        name: htop
+      when : ansible_distribution == "Ubuntu"
+
+    - name: Bu gorev Apache2 yuklemesini gerceklestirir
+      apt:
+        name: apache2
+      when: ansible_distribution == "Ubuntu"
+
+#    - name : htop paketini RedHat e kurar
+#      yum :
+#         name: httpd
+#         state: latest
+#      when : ansible_distribution == "Redhat" 

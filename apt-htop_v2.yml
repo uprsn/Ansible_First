@@ -1,0 +1,9 @@
+---
+  - hosts: all
+    become : true
+    tasks:
+
+    - name : htop paketini RedHat e kurar
+      yum :
+        name: httpd
+      when : ansible_distribution == "Ubuntu"
